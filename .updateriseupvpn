@@ -1,0 +1,18 @@
+## Maintained by : Johnathan Spiva <sprungles.me@tuta.io>
+
+## Notes: This semi works. It currently has a system dependency disruption. So DO NOT use this yet.
+
+echo 'This is a work in progress. This is not fully complete.'
+
+wget http://security.ubuntu.com/ubuntu/pool/universe/r/riseup-vpn/riseup-vpn_0.21.11+ds1-5ubuntu2_amd64.deb
+
+# If alien is installed, it will skip. If not, installs Alien.
+if [ dnf list installed alien &> /dev/null && echo "alien is installed" ]; then
+ echo 'alien is installed, continuing without installing.';
+else
+ echo 'alien is not install. Installing alien.';
+ yes | sudo dnf install alien ;
+fi
+
+sudo alien -r riseup-vpn_0.21.11+ds1-5ubuntu2_amd64.deb --scripts
+sudo dnf install --nogpgcheck ./riseup-vpn*.rpm
